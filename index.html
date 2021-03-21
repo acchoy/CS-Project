@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Fastest Typing</title>
+  <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Staatliches&display=swap" rel="stylesheet">
+		
+<style>
+  .rounded-circle{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 20%;
+  }
+
+  .container{
+  background-color: #224B61;
+  border-radius: 20px;
+  width: 750px;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  }
+  
+  h6{
+  text-align: center;
+  margin-top: 20px; 
+  margin-left: 850px; 
+  width: 150px; 
+  background-color: #224B61; 
+  color: yellow; 
+  border-radius: 10px;
+  padding: 8px;
+  }
+  
+</style>
+
+</head>
+
+<body style="background-color: #4482A2; color: white; ">
+<h1 style="background-color: gray; text-align: center; padding: 20px; font-family: 'Staatliches', cursive">FASTEST  ⌨  TYPING  </h1>
+
+<img class="rounded-circle" src="https://quirkycruise.com/wp-content/uploads/2017/02/636023915581576536270900784_typing.gif">
+
+
+ <div class="container text-center">
+
+<h5 style="margin-left: 335px; width: 50px; border: 1px solid yellow; font-family: 'DotGothic16', sans-serif;">TYPE</h5>
+<h2 style="color: yellow; font-family: 'DotGothic16', sans-serif;" id="randomphrase">Hello World!</h2>
+<hr style="border-top:3px solid gray;">
+<input type="text" class="form-control" id="phrase" style="margin-top: 20px; margin-bottom: 20px;" autofocus>
+
+<h5 style="font-family: 'DotGothic16', sans-serif;">Points: <span id="points">0</span></h5>
+<h4 style="font-family: 'DotGothic16', sans-serif;">Seconds: <span id="second">0</span></h4>
+</div>
+
+<h6 onclick="instructShow()">Instructions</h6>
+
+<h6 onclick="authorTip()">More</h6>
+
+<h2 style="text-align: center; margin-top: 20px; color: yellow; font-family: 'Staatliches', cursive;"id="timesup"></h2>
+  
+<script>
+window.addEventListener('load', start);
+
+let gameStart;
+let second = 8;
+let points = 0;
+
+const phraseTyped = document.querySelector('#phrase');
+const randomPhrase = document.querySelector('#randomphrase');
+const pointHad = document.querySelector('#points');
+const secondLeft = document.querySelector('#second');
+const times = document.querySelector('#timesup');
+const phrases = [
+  'never gonna give you up', 'never gonna let you down', 'never gonna run around', 'never gonna desert you', 'never gonna make you cry', 'never gonna say good bye', 
+  'never gonna tell a lie', 'never gonna hurt you', 'life is a journey', 'judge a book cover', 'god gold glory', 'beating around the bush', 'raining cats and dogs',
+  'curiosity killed a cat', 'a piece of cake', 'cost an arm and a leg', 'back to square one', 'once in a blue moon', 'call it a day', 'have a nice day',
+  'the elephant in the room', 'diamond in the rough', 'ace in the hole', 'wolf in sheep fur', 'one in a million', 'holding a grudge', 'shinzo wo sasageyo',
+  'an apple a day', 'monster under your bed', 'blessing in disguise', 'no pain no gain', 'add insult to injury', 'spill the beans', 'health is wealth', 'time is gold',
+  'the final count down', 'electric boogaloo', 'burst your bubble', 'cut to the chase', 'hello world', 'cry over spilled milk', 'thank god its friday', 'just do it'
+];
+
+
+function start() {
+second.innerHTML = 8;
+setPhrase(phrases);
+phraseTyped.addEventListener('input', startMatch);
+setInterval(timer, 1000);
+setInterval(gameOn, 50);
+}
+
+function authorTip(){
+	window.location.href ='More.html';
+	}
+	
+function instructShow(){
+	alert("1. Type the phrase before time is out");
+	alert("2. Start another round by typing the phrase shown");
+	alert("3. Each correct phrase will add a point");
+	}
+
+
+function startMatch() {
+if (valiDate()) {
+	gameStart = true;
+    second = 8;
+    setPhrase(phrases);
+    phraseTyped.value = '';
+    points++;
+}
+if (points === -1) {
+    pointHad.innerHTML = 0;
+} 
+else {
+    pointHad.innerHTML = points;
+}}
+
+function timer() {
+if (second > 0) {
+	second--;
+  } 
+else if (second === 0) {
+	gameStart = false;
+  }
+	secondLeft.innerHTML = second;
+}
+ 
+function gameOn() {
+	if (!gameStart && second === 0) {
+    times.innerHTML = 'Time is Up!';
+    points = -1;
+  }}
+  
+
+function valiDate() {
+if (phraseTyped.value === randomPhrase.innerHTML) {
+	return true;
+}	
+else {
+    times.innerHTML = '';
+    return false;
+  }}
+
+function setPhrase(words) {
+	const phraseLength = Math.floor(Math.random() * phrases.length);
+	randomPhrase.innerHTML = phrases[phraseLength];
+}
+
+</script>
+</body>
+</html>
